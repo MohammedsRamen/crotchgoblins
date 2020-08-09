@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+    install:
+      commands:
+      -  apt update -y
+      -  apt upgrade -y
+    prebuild:
+    build:
+      - sudo apt install mysql-server -y
+      - sudo mysql_secure_installation
+    postbuild:
+      - aws s3 sync ./ s3://patternschange
